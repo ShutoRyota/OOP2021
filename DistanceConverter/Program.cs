@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 namespace DistanceConverter {
     class Program {
 
-        static FeetConverter fc = new FeetConverter();
-
         static void Main(string[] args) {
             if (args.Length >= 1 && args[0] == "-tom") {
                 PrintFeetToMeterList(1, 10);
@@ -19,14 +17,14 @@ namespace DistanceConverter {
 
         private static void PrintFeetToMeterList(int start, int stop) {
             for (int feet = start; feet <= stop; feet++) {
-                double meter = fc.FeetToMeter(feet);
+                double meter = FeetConverter.FeetToMeter(feet);
                 Console.WriteLine("{0}ft = {1:0.0000}m", feet, meter);
             }
         }
          //↑出力↓
         private static void PrintMeterToFeetList(int start,int stop) {
             for (int meter = start; meter <= stop; meter++) {
-                double feet = fc.MeterToFeet(meter);
+                double feet = FeetConverter.MeterToFeet(meter);
                 Console.WriteLine("{0}m = {1:0.0000}ft", meter, feet);
             }
         }
