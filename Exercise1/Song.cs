@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace Exercise1 {
     class Song {
-        private string Title;
-        private string ArtistName;
-        private int Length;
+        string Title;
+        string ArtistName;
+        int Length;
 
         public Song(string title, string artistName, int length) {
             Title = title;
             ArtistName = artistName;
             Length = length;
         }
+
+        
+
     }
 }
