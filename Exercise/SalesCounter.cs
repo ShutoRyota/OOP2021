@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Exercise3 {
+namespace Exercise {
     //売上修正クラス
     class SalesCounter  {
 

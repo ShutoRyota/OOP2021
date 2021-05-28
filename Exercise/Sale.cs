@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Exercise3 {
+namespace Exercise {
     class Sale {
         //店舗名
         public string ShopName { get; set; }
