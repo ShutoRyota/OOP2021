@@ -11,12 +11,13 @@ namespace Exercise1 {
         int Length;
 
         public Song(string title, string artistName, int length) {
-            Title = title;
-            ArtistName = artistName;
-            Length = length;
+            Title1 = title;
+            ArtistName1 = artistName;
+            Length1 = length;
         }
 
-        
-
+        public string Title1 { get => Title; set => Title = value; }
+        public string ArtistName1 { get => ArtistName; set => ArtistName = value; }
+        public int Length1 { get => Length; set => Length = value; }
     }
 }

@@ -9,12 +9,15 @@ namespace Exercise1 {
         static void Main(string[] args) {
             Song[] songs = new Song[3] {new Song("aa","aaa",100), 
                                         new Song("bb", "bbb", 60), new Song("cc", "ccc", 121)};
-            
 
+            PrintSongs(songs);
         }
 
-        public static void PrintSongs() {
-
+        public static void PrintSongs(Song[] songs) {
+            foreach (Song song in songs) {
+                Console.WriteLine("タイトル：{0} アーティスト:{1} 時間 {2}:{3:00}"
+                                    , song.Title1, song.ArtistName1, song.Length1 / 60, song.Length1 % 60);
+            }
         }
     }
 }
