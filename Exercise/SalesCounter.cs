@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Exercise {
-    //売上修正クラス
+    //売上集計クラス
     class SalesCounter  {
 
         private List<Sale> _sales;
