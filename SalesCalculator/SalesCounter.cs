@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace SalesCalculator {
     //売上修正クラス
-    class SalesCounter  {
+    class SalesCounter {
 
-        private IEnumerable<Sale> _sales;
+        private List<Sale> _sales;
 
-        public SalesCounter(string filepath)  {
+        public SalesCounter(string filepath) {
             _sales = ReadSales(filepath);
         }
 
-        public IDictionary<string,int> GetPerStoreSales() {
-            var dict = new Dictionary<string, int>();
-            foreach(var sale in _sales) {
+        public Dictionary<string,int> GetPerStoreSales() {
+            Dictionary<string, int> dict = new Dictionary<string, int>();
+            foreach(Sale sale in _sales) {
                 if (dict.ContainsKey(sale.ShopName)) {
                     dict[sale.ShopName] += sale.Amount;
                 } else {
