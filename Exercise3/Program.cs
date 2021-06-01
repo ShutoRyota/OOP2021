@@ -12,7 +12,7 @@ namespace Exercise3 {
             Dictionary<string, int> amountPerCategory = sales.GetPerCategorySales();
 
             foreach (var obj in amountPerCategory) {
-                Console.WriteLine("{0} {1}", obj.Key, obj.Value);
+                Console.WriteLine("{0} {1:N0}円", obj.Key, obj.Value);
             }
 
         }
