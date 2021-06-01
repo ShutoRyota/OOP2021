@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Exercise {
+namespace Exercise3 {
     //売上集計クラス
     class SalesCounter  {
 
@@ -30,7 +30,7 @@ namespace Exercise {
         public Dictionary<string, int> GetPerCategorySales() {
             Dictionary<string, int> dict = new Dictionary<string, int>();
             foreach (Sale sale in _sales) {
-                if (dict.ContainsKey(sale.ShopName)) {
+                if (dict.ContainsKey(sale.ProductCategory)) {
                     dict[sale.ProductCategory] += sale.Amount;
                 } else {
                     dict[sale.ProductCategory] = sale.Amount;
