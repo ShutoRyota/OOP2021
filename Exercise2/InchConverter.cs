@@ -9,11 +9,11 @@ namespace Exercise2 {
 
         public static void PrintResult(int start,int stop) {
             for(int i = start; i <= stop; i++) {
-                Console.WriteLine("{0}m = {1:0.0000}in",i,MeterToinch(i));
+                Console.WriteLine("{0}m = {1:0.0000}in",i,MeterToInch(i));
             }
         }
 
-        public static double MeterToinch(double meter) {
+        public static double MeterToInch(double meter) {
             double inch = meter * 0.0245;
 
             return inch;
