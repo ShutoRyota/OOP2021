@@ -14,9 +14,9 @@ namespace Exercise1 {
         }
 
         public static void PrintSongs(Song[] songs) {
-            foreach (Song song in songs) {
-                Console.WriteLine("タイトル：{0} アーティスト:{1} 時間 {2}:{3:00}"
-                                    , song.Title1, song.ArtistName1, song.Length1 / 60, song.Length1 % 60);
+            foreach (var song in songs) {
+                Console.WriteLine("タイトル:{0} アーティスト:{1} 時間 {2:m\\:ss}:{3:00}"
+                                    , song.Title1, song.ArtistName1, song.Length1, song.Length1 % 60);
             }
         }
     }
