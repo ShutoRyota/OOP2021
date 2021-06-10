@@ -8,10 +8,16 @@ namespace Section01 {
     class Program {
         static void Main(string[] args) {
 
-            int count = 0;
+            var session = new Dictionary<string, object>();
+            session["myProduct"] = new Product();
 
-            Console.WriteLine($"後置:{count++}");
-            Console.WriteLine($"前置:{++count}");
+            var prduct = session["myProduct"] as Product;
+
+            if (prduct == null) {
+                Console.WriteLine("失敗");
+            } else {
+                Console.WriteLine("成功");
+            }
 
         }
 
