@@ -27,7 +27,7 @@ namespace Exercise2 {
             Console.WriteLine();
 
             //2.5
-            var query = yms.ToList().Select(y => y.AddOneMonth()).ToArray() ;
+            var query = yms.Select(y => y.AddOneMonth()).ToArray() ;
 
             foreach (var y in query) {
                 Console.WriteLine(y);
