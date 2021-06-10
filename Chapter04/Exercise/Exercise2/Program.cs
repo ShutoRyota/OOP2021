@@ -22,7 +22,7 @@ namespace Exercise2 {
 
             // 2.4
             var year21 = Search21(yms);
-            Console.WriteLine(year21?.ToString());
+            Console.WriteLine(year21?.ToString()?? "２１世紀のデータはありません");
 
             Console.WriteLine();
 
@@ -36,6 +36,7 @@ namespace Exercise2 {
 
         //2.3
         public static YearMonth Search21(YearMonth[] yms) {
+
             foreach (var y in yms) {
                 if (y.Is21Century) {
                     return y;
