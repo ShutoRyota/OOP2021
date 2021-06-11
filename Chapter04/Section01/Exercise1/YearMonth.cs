@@ -22,13 +22,14 @@ namespace Exercise1 {
 
         public YearMonth AddOneMonth() {
             var next = new YearMonth(
-                (this.Month != 12) ? this.Year : this.Year+1,
-                (++this.Month) % 12);
+                (this.Month != 12) ? this.Year : this.Year + 1,
+                (this.Month % 12) + 1);
 
             return next;
         }
+
         public override string ToString() {
-            return Year+"年"+Month+"月";
+            return $"{Year}年{Month}月";
         }
 
         
