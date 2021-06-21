@@ -31,12 +31,13 @@ namespace Exercise1 {
             //5.3.1
             var str2 = "Jackdaws love my big sphinx of quartz";
             var ch = str2.ToCharArray();
-            int count;
+            int count=0;
             foreach(var c in ch) {
                 if (char.IsWhiteSpace(c)) {
-                    
+                    count++;
                 }
             }
+            Console.WriteLine(count);
 
         }
     }
