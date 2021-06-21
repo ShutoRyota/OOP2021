@@ -30,7 +30,7 @@ namespace Test01 {
             return scores;
         }
 
-        //科目ごとのリストの作成： 
+        //科目ごとの点数： 
         public IDictionary<string, int> GetPerStudentScore() {
 
             var dict = new Dictionary<string, int>();
