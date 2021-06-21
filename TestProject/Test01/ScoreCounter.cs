@@ -14,7 +14,7 @@ namespace Test01 {
         }
 
 
-        //メソッドの概要： 
+        //ファイルからStudentクラスの作成： 
         private static IEnumerable<Student> ReadScore(string filePath) {
             var scores = new List<Student>();
             var lines = File.ReadAllLines(filePath);
@@ -30,7 +30,7 @@ namespace Test01 {
             return scores;
         }
 
-        //メソッドの概要： 
+        //科目ごとのリストの作成： 
         public IDictionary<string, int> GetPerStudentScore() {
 
             var dict = new Dictionary<string, int>();
