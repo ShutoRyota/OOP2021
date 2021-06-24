@@ -21,23 +21,13 @@ namespace Exercise1 {
             }
             #endregion
 
-            #region 5.2
-            Console.Write("数値：");
-            int.TryParse(Console.ReadLine(),out int result);
-            string str = $"{result:N0}";
-            Console.WriteLine(str);
-            #endregion
+            string str = "Novelist=谷崎潤一郎;BestWork=春琴抄;Born=1886";
 
-            //5.3.1
-            var str2 = "Jackdaws love my big sphinx of quartz";
-            var ch = str2.ToCharArray();
-            int count=0;
-            foreach(var c in ch) {
-                if (char.IsWhiteSpace(c)) {
-                    count++;
-                }
+            var words = str.Split(';');
+
+            foreach(var s in words) {
+                
             }
-            Console.WriteLine(count);
 
         }
     }
