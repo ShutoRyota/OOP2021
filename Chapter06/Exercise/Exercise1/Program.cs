@@ -8,7 +8,7 @@ namespace Exercise1 {
     class Program {
         static void Main(string[] args) {
             var numbaers = new int[] { 5, 10, 17, 9, 3, 21, 10, 40, 21, 3, 35, };
-            #region
+            #region driver
             Exercise6_1_1(numbaers);
             Console.WriteLine("-----");
 
@@ -54,7 +54,7 @@ namespace Exercise1 {
         }
 
         private static void Exercise6_1_5(int[] numbaers) {
-            Console.WriteLine(numbaers.Distinct().Count(n => n >= 10));
+            Console.WriteLine(numbaers.Distinct().Count(n => n > 10));
         }       
     }
 }
