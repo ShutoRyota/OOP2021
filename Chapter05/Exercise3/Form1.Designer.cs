@@ -230,6 +230,7 @@ namespace Exercise3 {
             // 
             // textBox54_1
             // 
+            this.textBox54_1.Font = new System.Drawing.Font("MS UI Gothic", 12F);
             this.textBox54_1.Location = new System.Drawing.Point(236, 590);
             this.textBox54_1.Multiline = true;
             this.textBox54_1.Name = "textBox54_1";

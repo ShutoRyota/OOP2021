@@ -15,7 +15,7 @@ namespace Exercise3 {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            inputStringText.Text = "Jackdaws love my big sphinx of quartz";
+            inputStringText.Text= "Jackdaws love my big sphinx of quartz";
             inputText2.Text = "Novelist=谷崎潤一郎;BestWork=春琴抄;Born=1886";
         }
 
@@ -31,7 +31,6 @@ namespace Exercise3 {
             } catch (ArgumentException) {
                 textBox532_3.Text = "何も入力されていません";
             }
-            
 
         }
 
@@ -49,21 +48,40 @@ namespace Exercise3 {
 
         private void button535_Click(object sender, EventArgs e) {
             var words = inputStringText.Text.Split(' ');
-            var sb = new StringBuilder();
-            foreach(string s in words) {
+            var sb = new StringBuilder(words[0]);
+            foreach(string s in words.Skip(1)) {
+                sb.Append(' ');
                 sb.Append(s);
-                sb.Append(" ");
             }
 
-            textBox535.Text = sb.ToString().Trim();
+            textBox535.Text = sb.ToString();
 
         }
 
         private void button54_Click(object sender, EventArgs e) {
-            var plof = inputText2.Text.Split(';').Select(s => s.Substring(s.IndexOf('=') + 1)).ToArray();
+            var prof = inputText2.Text.Split(';').Select(s => s.Split('=')).ToArray();
 
-            textBox54_1.Text = $"作家　：{plof[0]}\r\n代表作：{plof[1]}\r\n誕生年：{plof[2]}";
+            textBox54_1.Text = $"{ToJap(prof[0][0])}   ： {prof[0][1]}\r\n" +
+                               $"{ToJap(prof[1][0])}： {prof[1][1]}\r\n" +
+                               $"{ToJap(prof[2][0])}： {prof[2][1]}";
 
+
+        }
+
+        private string ToJap(string key) {
+            switch (key) {
+                case "Novelist":
+                    return "作家";
+
+                case "BestWork":
+                    return "代表作";
+
+                case "Born":
+                    return "誕生年";
+
+                default:
+                    throw new ArgumentException("引数が正しくない");
+            }
         }
     }
 }
