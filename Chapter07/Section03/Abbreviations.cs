@@ -50,8 +50,8 @@ namespace Section03 {
             return _dict.Remove(abbr);
         }
 
-        public IEnumerable<KeyValuePair<string, string>> OnlyChars(int chars) {
-            return _dict.Where(x => x.Key.Length == chars);
+        public IEnumerable<KeyValuePair<string, string>> OnlyChars(int number) {
+            return _dict.Where(x => x.Key.Length == number);
         }
     }
 }
