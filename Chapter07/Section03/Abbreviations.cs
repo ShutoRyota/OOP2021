@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,10 +9,10 @@ using System.Threading.Tasks;
 namespace Section03 {
     // List 7-19
     // 略語と対応する日本語を管理するクラス
-    class Abbreviations {
+    class Abbreviations : IEnumerable<KeyValuePair<string,string>> {
         private Dictionary<string, string> _dict = new Dictionary<string, string>();
 
-        public int Count { get { return _dict.Count(); }  }
+        public int Count { get { return _dict.Count; }  }
 
 
         // コンストラクタ
@@ -52,6 +53,14 @@ namespace Section03 {
 
         public IEnumerable<KeyValuePair<string, string>> OnlyChars(int number) {
             return _dict.Where(x => x.Key.Length == number);
+        }
+
+        public IEnumerator<KeyValuePair<string, string>> GetEnumerator() {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            throw new NotImplementedException();
         }
     }
 }

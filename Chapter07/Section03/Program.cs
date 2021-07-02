@@ -49,7 +49,6 @@ namespace Section03 {
             foreach(var item in abbrs.OnlyChars(3)) {
                 Console.WriteLine($"{item.Key}={item.Value}");
             }
-
         }
     }
 }

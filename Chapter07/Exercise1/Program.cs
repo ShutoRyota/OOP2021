@@ -21,8 +21,7 @@ namespace Exercise1 {
 
         private static void Exercise7_1_1(string text) {
             var dict = new Dictionary<char, int>();
-            var textUp = text.ToUpper();
-            foreach(var ch in textUp.ToCharArray()) {
+            foreach(var ch in text.ToUpper()) {
                 if ('A' <= ch && ch <= 'Z') {
                     if (dict.ContainsKey(ch)) {
                         dict[ch]++;
@@ -39,8 +38,7 @@ namespace Exercise1 {
 
         private static void Exercise7_1_2(string text) {
             var dict = new SortedDictionary<char,int>();
-            var textUp = text.ToUpper();
-            foreach (var ch in textUp.ToCharArray()) {
+            foreach (var ch in text.ToUpper()) {
                 if ('A' <= ch && ch <= 'Z') {
                     if (dict.ContainsKey(ch)) {
                         dict[ch] += 1;
