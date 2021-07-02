@@ -15,18 +15,6 @@ namespace Exercise1 {
 
             Exercise7_1_2(text);
             Console.WriteLine("-----");
-
-            Exercise7_2_1(text);
-            Console.WriteLine("-----");
-
-            Exercise7_2_2(text);
-            Console.WriteLine("-----");
-
-            Exercise7_2_3(text);
-            Console.WriteLine("-----");
-
-            Exercise7_2_4(text);
-            Console.WriteLine("-----");
             #endregion
         
         }
@@ -65,22 +53,6 @@ namespace Exercise1 {
             foreach (var result in dict) {
                 Console.WriteLine($"{result.Key} : {result.Value}");
             }
-        }
-
-        private static void Exercise7_2_1(string text) {
-            
-        }
-
-        private static void Exercise7_2_2(string text) {
-            
-        }
-
-        private static void Exercise7_2_3(string text) {
-            
-        }
-
-        private static void Exercise7_2_4(string text) {
-            
         }
     }
 }
