@@ -15,19 +15,23 @@ namespace Exercise1 {
         }
 
         private void btAction_Click(object sender, EventArgs e) {
-            var date = new DateTime((int)nudYear.Value,(int)nudMonth.Value,(int)nudDay.Value);
+            var date = dTP1.Value;
             var today = DateTime.Now;
-
-            var diff = today.Date - date.Date;
-
-            tbOutput.Text = diff.TotalSeconds > 0 ? $"今日まで{diff.Days}日経過している" :
-                                                                            $"今日からあと{-diff.Days}日";
-
-
             
+            tbOutput.Text = GetAge(date,today).ToString();
 
             tbLeap.Text = DateTime.IsLeapYear(date.Year) ? "閏年" : "閏年でない";
 
+        }
+
+        public int GetAge(DateTime birthday,DateTime target) {
+            var age = target.Year - birthday.Year;
+
+
+            if (target < birthday.AddYears(age)) {
+                age--;
+            }
+            return age;
         }
     }
 }
