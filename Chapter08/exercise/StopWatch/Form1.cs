@@ -13,17 +13,22 @@ namespace StopWatch {
     public partial class Form1 : Form {
         Stopwatch sw = new Stopwatch();
         Timer tm = new Timer();
+
         public Form1() {
             InitializeComponent();
         }
 
         private void start_Click(object sender, EventArgs e) {           
             sw.Start();
-            
+
             tm.Interval = 1;
             tm.Start();
             tm.Tick += Tm_Tick;
             
+        }
+
+        private void Tm_Tick(object sender, EventArgs e) {
+            timeDisp.Text = GetSWTime();
         }
 
         private void stop_Click(object sender, EventArgs e) {
@@ -32,21 +37,22 @@ namespace StopWatch {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            timeDisp.Text = sw.Elapsed.ToString(@"hh\:mm\:ss\:ff");
-        }
-
-        private void Tm_Tick(object sender, EventArgs e) {
-            timeDisp.Text = sw.Elapsed.ToString(@"hh\:mm\:ss\:ff");
+            timeDisp.Text = GetSWTime();
         }
 
         private void reset_Click(object sender, EventArgs e) {
-            sw.Restart();
-            rapDisp.Text = string.Empty;
-            timeDisp.Text = sw.Elapsed.ToString(@"hh\.mm\.ss\.ff");
+            sw.Reset();
+            tm.Stop();
+            lapDisp.Items.Clear();
+            timeDisp.Text = GetSWTime();
         }
 
         private void rap_Click(object sender, EventArgs e) {
-            rapDisp.Text += sw.Elapsed.ToString(@"hh\:mm\:ss\:ff")+"\r\n";
+            lapDisp.Items.Insert(0,GetSWTime());
+        }
+
+        private string GetSWTime() {
+            return sw.Elapsed.ToString(@"hh\:mm\:ss\:ff");
         }
     }
 }
