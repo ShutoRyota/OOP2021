@@ -23,8 +23,9 @@ namespace CarReprtSystem {
             その他
         }
 
-        /*
-        public CarReport(DateTime date, string auther, MakerGroup maker,string carName, 
+        
+        //更新用
+        public void Update(DateTime date, string auther, MakerGroup maker,string carName, 
                                                                          string report, Image picture) {
             this.Date = date;
             this.Auther = auther;
@@ -33,7 +34,7 @@ namespace CarReprtSystem {
             this.Report = report;
             this.Picture = picture;
 
-        }*/
+        }
 
 
     }
