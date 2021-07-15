@@ -75,6 +75,7 @@ namespace CarReprtSystem {
             this.dgvRegistData.Location = new System.Drawing.Point(82, 251);
             this.dgvRegistData.MultiSelect = false;
             this.dgvRegistData.Name = "dgvRegistData";
+            this.dgvRegistData.ReadOnly = true;
             this.dgvRegistData.RowTemplate.Height = 21;
             this.dgvRegistData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvRegistData.Size = new System.Drawing.Size(706, 188);
@@ -272,6 +273,7 @@ namespace CarReprtSystem {
             this.btSave.TabIndex = 7;
             this.btSave.Text = "保存...";
             this.btSave.UseVisualStyleBackColor = true;
+            this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
             // btOpen
             // 
@@ -281,6 +283,7 @@ namespace CarReprtSystem {
             this.btOpen.TabIndex = 7;
             this.btOpen.Text = "開く...";
             this.btOpen.UseVisualStyleBackColor = true;
+            this.btOpen.Click += new System.EventHandler(this.btOpen_Click);
             // 
             // btPictureOpen
             // 
