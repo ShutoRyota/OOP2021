@@ -35,7 +35,15 @@ namespace Exercise1 {
         }
 
         private static void Exercise1_2(string file) {
-            
+            var doc = XDocument.Load(file);
+            var sports = doc.Root.Elements().
+                         Select(x => new {
+                             Name = (string)x.Element("name").Attribute("kanji"),
+                             firstplayed = (int)x.Element("firstplayed")
+                         }).OrderBy(year=>year.firstplayed);
+            foreach (var sport in sports) {
+                Console.WriteLine(sport.Name);
+            }
         }
 
         private static void Exercise1_3(string file) {
