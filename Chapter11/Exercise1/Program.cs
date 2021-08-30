@@ -48,12 +48,12 @@ namespace Exercise1 {
 
         private static void Exercise1_3(string file) {
             var doc = XDocument.Load(file);
-            var sports = doc.Root.Elements().
+            var sport = doc.Root.Elements().
                           Select(x => new {
                               Name = (string)x.Element("name"),
                               Teammenbers = (int)x.Element("teammembers")
-                          });
-            var sport = sports.OrderByDescending(x => x.Teammenbers).First();
+                          }).OrderByDescending(x => x.Teammenbers).First();
+            
 
 
             Console.WriteLine(sport.Name) ;
