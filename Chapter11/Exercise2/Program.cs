@@ -13,27 +13,14 @@ namespace Exercise2 {
 
             var diffikanjis = xdoc.Root.Elements();
 
-            foreach(var moji in diffikanjis) {
-                var newdoc = new XElement("difficultkanji",
-                             new XElement("word", new XElement("kanji", moji.Element("kanji")),
-                             new XElement("yomi", moji.Element("yomi"))));
-                
-                newdoc.Add(newfile);
-                newdoc.Save(newfile);
-                
-            }
-            
-            
-            var newxdoc = XDocument.Load(newfile);
-            
-            
-            foreach(var kan in newxdoc.Root.Elements()) {
-                var kanji = kan.Element("kanji");
-                Console.WriteLine(kanji);
-            }
-            
+            var query = xdoc.Root.Elements().Select(x => new XElement("word",
+                                                        new XAttribute("kanji", x.Element("kanji").Value),
+                                                        new XAttribute("yomi", x.Element("yomi").Value)
+                                                        ));
 
-           
+            var root = new XElement("difficultkanji", query);
+
+            root.Save(newfile);
         }
     }
 }
