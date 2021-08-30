@@ -81,6 +81,11 @@ namespace Exercise1 {
 
             xdoc.Save(newfile);
 
+            foreach(var sport in xdoc.Root.Elements()) {
+                var xname = sport.Element("name");
+
+                Console.WriteLine(xname.Value);
+            }
         }
 
     } 
