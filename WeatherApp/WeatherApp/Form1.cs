@@ -13,14 +13,25 @@ using System.Xml.Linq;
 
 namespace WeatherApp {
     public partial class Form1 : Form {
+        Dictionary<string, int> areas;
         public Form1() {
             InitializeComponent();
+            areas = new Dictionary<string, int>() {
+            {"東京都",13 },
+            {"神奈川県",14 },
+            {"埼玉県",11 },
+            {"千葉県",12},
+            {"茨城県" ,8},
+            {"栃木県",9 },
+            {"群馬県",10},
+            {"山梨県",19}
+        };
         }
 
         private void btView_Click(object sender, EventArgs e) {
-            int code = SelectArea();
+            
 
-            if (code != 0) {
+            if (areas.TryGetValue(cbArea.Text,out int code)) {
                 var result = GetWeatherReportFromYahoo(code);
                 tbresult.Text = string.Empty;
                 foreach (var s in result) {
@@ -46,20 +57,6 @@ namespace WeatherApp {
             }
         }
 
-        private int SelectArea() {
-            string areaName = cbArea.Text;
-            switch (areaName) {
-                case "東京都": return 13;
-                case "神奈川県": return 14;
-                case "埼玉県": return 11;
-                case "千葉県": return 12;
-                case "茨城県": return 8;
-                case "栃木県": return 9;
-                case "群馬県": return 10;
-                case "山梨県": return 19;
-
-                default: return 0;
-            }
-        }
+       
     }
 }
