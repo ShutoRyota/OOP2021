@@ -16,14 +16,15 @@ namespace Section04 {
         }
 
         public Program() {
-            //DownloadString();
-            //DownloadFileAsync();
-            //OpenReadSample();
-            var result = GetWeatherReportFromYahoo(4210);
-            foreach(var s in result) {
-                Console.WriteLine(s);
+            int code = SelectArea();
+
+            if (code != 0) {
+                var result = GetWeatherReportFromYahoo(code);
+                foreach (var s in result) {
+                    Console.WriteLine(s);
+                }
+                Console.ReadLine();
             }
-            Console.ReadLine();
         }
         //リスト14.15
         public void DownloadString() {
@@ -82,5 +83,23 @@ namespace Section04 {
             }
         }
 
+        private int SelectArea() {
+            Console.WriteLine("地域コードを入力 \r\n1:前橋 \r\n2:みなかみ \r\n3:宇都宮 \r\n4:水戸 \r\n9:その他");
+            int areaCode = int.Parse(Console.ReadLine());
+            switch (areaCode) {
+                case 1: return 4210;
+                case 2: return 4220;
+                case 3: return 4110;
+                case 4: return 4010;
+                case 9:
+                    Console.WriteLine("コードを入力してください");
+                    return int.Parse(Console.ReadLine());
+
+                default: return 0;
+            }
+
+        }
+
     }
+
 }
