@@ -10,6 +10,14 @@ using System.Xml.Linq;
 
 namespace Section04 {
     class Program {
+        Dictionary<string, int> areas = new Dictionary<string, int>() {
+            {"前橋", 4210},
+            {"みなかみ",4220 },
+            {"宇都宮",4110},
+            {"水戸",4010},
+        };
+        List<int> cityCode = new List<int>();
+        
         static void Main(string[] args) {
             new Program();
 
@@ -84,19 +92,20 @@ namespace Section04 {
         }
 
         private int SelectArea() {
-            Console.WriteLine("地域コードを入力 \r\n1:前橋 \r\n2:みなかみ \r\n3:宇都宮 \r\n4:水戸 \r\n9:その他");
-            int areaCode = int.Parse(Console.ReadLine());
-            switch (areaCode) {
-                case 1: return 4210;
-                case 2: return 4220;
-                case 3: return 4110;
-                case 4: return 4010;
-                case 9:
-                    Console.WriteLine("コードを入力してください");
-                    return int.Parse(Console.ReadLine());
+            var num = 1;
+            Console.WriteLine("地域コードを入力");
+            foreach(KeyValuePair<string,int> pair in areas) {
+                Console.WriteLine($"{num++}:{pair.Key}");
+                cityCode.Add(pair.Value);
+            }         
+            Console.WriteLine("9:その他");
 
-                default: return 0;
+            int areaCode = int.Parse(Console.ReadLine());
+            if(areaCode == 9) {
+                Console.WriteLine("コードを入力してください");
+                return int.Parse(Console.ReadLine());
             }
+            return cityCode[areaCode - 1];
 
         }
 
