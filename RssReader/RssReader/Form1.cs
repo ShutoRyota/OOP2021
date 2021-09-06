@@ -7,11 +7,14 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace RssReader {
     public partial class Form1 : Form {
+        Dictionary<string, string> websitedic = new Dictionary<string, string>();
+
         public Form1() {
             InitializeComponent();
         }
@@ -24,16 +27,30 @@ namespace RssReader {
                 var stream = wc.OpenRead(url);
 
                 XDocument xdoc =  XDocument.Load(stream);
-                var titles = xdoc.Root.Descendants("title");
-                
-                foreach(var title in titles) {
-                    lbTitles.Items.Add(title.Value);
+                var titles = xdoc.Root.Descendants("title").ToArray() ;
+                var links = xdoc.Root.Descendants("link").ToArray();
+
+                for(int i= 0; i < titles.Length; i++) {
+                    websitedic.Add(titles[i].Value, links[i].Value);
                 }
+
+                lbTitles.Items.Clear();
+                foreach(var title in websitedic) { 
+                    
+                    lbTitles.Items.Add(title.Key);
+                }
+
             }
         }
 
-        private void lbTitles_SelectedIndexChanged(object sender, EventArgs e) {
-
+        private void lbTitles_Click(object sender, EventArgs e) {
+            if (websitedic.TryGetValue(lbTitles.SelectedItem.ToString(), out string urlstring)){
+                var url = new Uri(urlstring);
+                wbBrowser.Url = url;
+            }
+            
+            
+            
         }
     }
 }
