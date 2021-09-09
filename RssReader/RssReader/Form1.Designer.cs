@@ -29,6 +29,7 @@ namespace RssReader {
             this.wbBrowser = new System.Windows.Forms.WebBrowser();
             this.lbTitles = new System.Windows.Forms.ListBox();
             this.btRead = new System.Windows.Forms.Button();
+            this.tbdescription = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -65,7 +66,7 @@ namespace RssReader {
             this.lbTitles.ItemHeight = 15;
             this.lbTitles.Location = new System.Drawing.Point(9, 60);
             this.lbTitles.Name = "lbTitles";
-            this.lbTitles.Size = new System.Drawing.Size(256, 499);
+            this.lbTitles.Size = new System.Drawing.Size(256, 244);
             this.lbTitles.TabIndex = 3;
             this.lbTitles.Click += new System.EventHandler(this.lbTitles_Click);
             // 
@@ -79,11 +80,20 @@ namespace RssReader {
             this.btRead.UseVisualStyleBackColor = true;
             this.btRead.Click += new System.EventHandler(this.btRead_Click);
             // 
+            // tbdescription
+            // 
+            this.tbdescription.Location = new System.Drawing.Point(9, 310);
+            this.tbdescription.Multiline = true;
+            this.tbdescription.Name = "tbdescription";
+            this.tbdescription.Size = new System.Drawing.Size(256, 243);
+            this.tbdescription.TabIndex = 5;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 565);
+            this.Controls.Add(this.tbdescription);
             this.Controls.Add(this.btRead);
             this.Controls.Add(this.lbTitles);
             this.Controls.Add(this.wbBrowser);
@@ -103,6 +113,7 @@ namespace RssReader {
         private System.Windows.Forms.WebBrowser wbBrowser;
         private System.Windows.Forms.ListBox lbTitles;
         private System.Windows.Forms.Button btRead;
+        private System.Windows.Forms.TextBox tbdescription;
     }
 }
 

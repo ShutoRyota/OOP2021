@@ -41,11 +41,11 @@ namespace RssReader {
         }
 
         private void lbTitles_Click(object sender, EventArgs e) {
-            if (websitedic.TryGetValue(lbTitles.SelectedItem.ToString(), out var urlstring)) {
-                var url = new Uri(urlstring.Element("link").Value);
+            if (websitedic.TryGetValue(lbTitles.SelectedItem.ToString(), out var item)) {
+                var url = new Uri(item.Element("link").Value);
                 wbBrowser.Url = url;
 
-
+                tbdescription.Text = item.Element("description").Value;
 
             }
         }
