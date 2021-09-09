@@ -57,7 +57,7 @@ namespace RssReader {
             this.wbBrowser.ScriptErrorsSuppressed = true;
             this.wbBrowser.Size = new System.Drawing.Size(725, 503);
             this.wbBrowser.TabIndex = 2;
-            this.wbBrowser.Url = new System.Uri("https://yahoo.co.jp", System.UriKind.Absolute);
+            this.wbBrowser.Url = new System.Uri("", System.UriKind.Relative);
             // 
             // lbTitles
             // 

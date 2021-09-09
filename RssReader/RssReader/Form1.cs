@@ -13,7 +13,7 @@ using System.Xml.Linq;
 
 namespace RssReader {
     public partial class Form1 : Form {
-        Dictionary<string, string> websitedic = new Dictionary<string, string>();
+        Dictionary<string, XElement> websitedic = new Dictionary<string, XElement>();
 
         public Form1() {
             InitializeComponent();
@@ -27,30 +27,27 @@ namespace RssReader {
                 var stream = wc.OpenRead(url);
 
                 XDocument xdoc =  XDocument.Load(stream);
-                var titles = xdoc.Root.Descendants("title").ToArray() ;
-                var links = xdoc.Root.Descendants("link").ToArray();
+                var items = xdoc.Root.Descendants("item").ToArray() ;
 
-                for(int i= 0; i < titles.Length; i++) {
-                    websitedic.Add(titles[i].Value, links[i].Value);
-                }
+                websitedic = items.ToDictionary(x => x.Element("title").Value);
 
                 lbTitles.Items.Clear();
-                foreach(var title in websitedic) { 
+                foreach(var title in websitedic.Keys) { 
                     
-                    lbTitles.Items.Add(title.Key);
+                    lbTitles.Items.Add(title);
                 }
 
             }
         }
 
         private void lbTitles_Click(object sender, EventArgs e) {
-            if (websitedic.TryGetValue(lbTitles.SelectedItem.ToString(), out string urlstring)){
-                var url = new Uri(urlstring);
+            if (websitedic.TryGetValue(lbTitles.SelectedItem.ToString(), out var urlstring)) {
+                var url = new Uri(urlstring.Element("link").Value);
                 wbBrowser.Url = url;
+
+
+
             }
-            
-            
-            
         }
     }
 }
