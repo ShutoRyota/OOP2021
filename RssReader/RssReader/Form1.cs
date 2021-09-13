@@ -58,7 +58,6 @@ namespace RssReader {
             try {
                 var item = websitedic[lbTitles.SelectedItem?.ToString()];
                 Browser browser = new Browser();
-                browser.Text = item.Element("title").Value;
                 var url = new Uri(item.Element("link").Value);
                 browser.wbBrowser.Url = url;
                 browser.Show();
