@@ -28,10 +28,10 @@ namespace RssReader {
             this.tbUrl = new System.Windows.Forms.TextBox();
             this.lbTitles = new System.Windows.Forms.ListBox();
             this.btRead = new System.Windows.Forms.Button();
-            this.tbdescription = new System.Windows.Forms.TextBox();
             this.btWebDisp = new System.Windows.Forms.Button();
             this.tbUpdateDate = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.lbdisc = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -72,14 +72,6 @@ namespace RssReader {
             this.btRead.UseVisualStyleBackColor = true;
             this.btRead.Click += new System.EventHandler(this.btRead_Click);
             // 
-            // tbdescription
-            // 
-            this.tbdescription.Location = new System.Drawing.Point(271, 156);
-            this.tbdescription.Multiline = true;
-            this.tbdescription.Name = "tbdescription";
-            this.tbdescription.Size = new System.Drawing.Size(725, 243);
-            this.tbdescription.TabIndex = 5;
-            // 
             // btWebDisp
             // 
             this.btWebDisp.Font = new System.Drawing.Font("MS UI Gothic", 12F);
@@ -109,15 +101,23 @@ namespace RssReader {
             this.label2.TabIndex = 8;
             this.label2.Text = "最終更新日";
             // 
+            // lbdisc
+            // 
+            this.lbdisc.BackColor = System.Drawing.Color.White;
+            this.lbdisc.Location = new System.Drawing.Point(283, 131);
+            this.lbdisc.Name = "lbdisc";
+            this.lbdisc.Size = new System.Drawing.Size(713, 249);
+            this.lbdisc.TabIndex = 9;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 565);
+            this.Controls.Add(this.lbdisc);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbUpdateDate);
             this.Controls.Add(this.btWebDisp);
-            this.Controls.Add(this.tbdescription);
             this.Controls.Add(this.btRead);
             this.Controls.Add(this.lbTitles);
             this.Controls.Add(this.tbUrl);
@@ -135,10 +135,10 @@ namespace RssReader {
         private System.Windows.Forms.TextBox tbUrl;
         private System.Windows.Forms.ListBox lbTitles;
         private System.Windows.Forms.Button btRead;
-        private System.Windows.Forms.TextBox tbdescription;
         private System.Windows.Forms.Button btWebDisp;
         private System.Windows.Forms.TextBox tbUpdateDate;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbdisc;
     }
 }
 

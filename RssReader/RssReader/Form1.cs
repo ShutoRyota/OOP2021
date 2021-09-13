@@ -49,7 +49,7 @@ namespace RssReader {
             try {
                 var item = websitedic[lbTitles.SelectedItem?.ToString()];
                 tbUpdateDate.Text = item.Element("pubDate").Value;
-                tbdescription.Text = item.Element("description").Value;
+                lbdisc.Text = item.Element("description").Value;
             }catch(ArgumentNullException ane){ }
              
         }
