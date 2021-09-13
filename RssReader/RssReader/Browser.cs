@@ -10,8 +10,9 @@ using System.Windows.Forms;
 
 namespace RssReader {
     public partial class Browser : Form {
-        public Browser() {
+        public Browser(Uri url) {
             InitializeComponent();
+            wbBrowser.Url = url;
         }
 
         private void btBack_Click(object sender, EventArgs e) {

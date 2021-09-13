@@ -39,7 +39,11 @@ namespace RssReader {
                         lbTitles.Items.Add(title);
                     }
                     lbTitles.Enabled = true;
-                }catch(Exception ex) {}
+                }catch(WebException we) {
+                    MessageBox.Show(we.Message);
+                }catch(UriFormatException ufe) {
+                    MessageBox.Show(ufe.Message);
+                }
                 
 
             }
@@ -50,16 +54,16 @@ namespace RssReader {
                 var item = websitedic[lbTitles.SelectedItem?.ToString()];
                 tbUpdateDate.Text = item.Element("pubDate").Value;
                 lbdisc.Text = item.Element("description").Value;
-            }catch(ArgumentNullException ane){ }
+            }catch(ArgumentNullException ane){
+            
+            }
              
         }
 
         private void btWebDisp_Click(object sender, EventArgs e) {
             try {
                 var item = websitedic[lbTitles.SelectedItem?.ToString()];
-                Browser browser = new Browser();
-                var url = new Uri(item.Element("link").Value);
-                browser.wbBrowser.Url = url;
+                Browser browser = new Browser(new Uri(item.Element("link").Value));
                 browser.Show();
             }catch(ArgumentNullException ane) { }
         }
