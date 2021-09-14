@@ -13,7 +13,7 @@ using System.Xml.Linq;
 
 namespace RssReader {
     public partial class Form1 : Form {
-        Dictionary<string, XElement> websitedic = new Dictionary<string, XElement>();
+        Dictionary<string, XElement> items = new Dictionary<string, XElement>();
         
 
         public Form1() {
@@ -31,18 +31,15 @@ namespace RssReader {
                     XDocument xdoc = XDocument.Load(stream);
                     var items = xdoc.Root.Descendants("item").ToArray();
 
-                    websitedic = items.ToDictionary(x => x.Element("title").Value);
+                    this.items = items.ToDictionary(x => x.Element("title").Value);
 
                     lbTitles.Items.Clear();
-                    foreach (var title in websitedic.Keys) {
+                    foreach (var title in this.items.Keys) {
 
                         lbTitles.Items.Add(title);
                     }
-                    lbTitles.Enabled = true;
-                }catch(WebException we) {
-                    MessageBox.Show(we.Message);
-                }catch(UriFormatException ufe) {
-                    MessageBox.Show(ufe.Message);
+                }catch(Exception ex) {
+                    MessageBox.Show(ex.Message);
                 }
                 
 
@@ -51,10 +48,10 @@ namespace RssReader {
 
         private void lbTitles_Click(object sender, EventArgs e) {
             try {
-                var item = websitedic[lbTitles.SelectedItem?.ToString()];
+                var item = items[lbTitles.SelectedItem?.ToString()];
                 tbUpdateDate.Text = item.Element("pubDate").Value;
                 lbdisc.Text = item.Element("description").Value;
-            }catch(ArgumentNullException ane){
+            }catch(Exception ex){
             
             }
              
@@ -62,10 +59,10 @@ namespace RssReader {
 
         private void btWebDisp_Click(object sender, EventArgs e) {
             try {
-                var item = websitedic[lbTitles.SelectedItem?.ToString()];
+                var item = items[lbTitles.SelectedItem?.ToString()];
                 Browser browser = new Browser(new Uri(item.Element("link").Value));
                 browser.Show();
-            }catch(ArgumentNullException ane) { }
+            }catch(Exception ex) { }
         }
     }
 }
