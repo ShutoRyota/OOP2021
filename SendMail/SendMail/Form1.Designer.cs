@@ -36,6 +36,7 @@ namespace SendMail {
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btConfig = new System.Windows.Forms.Button();
+            this.btCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -75,7 +76,7 @@ namespace SendMail {
             // 
             this.tbTo.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.tbTo.Location = new System.Drawing.Point(122, 34);
-            this.tbTo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbTo.Margin = new System.Windows.Forms.Padding(2);
             this.tbTo.Name = "tbTo";
             this.tbTo.Size = new System.Drawing.Size(418, 31);
             this.tbTo.TabIndex = 1;
@@ -84,7 +85,7 @@ namespace SendMail {
             // 
             this.tbMessage.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.tbMessage.Location = new System.Drawing.Point(121, 186);
-            this.tbMessage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbMessage.Margin = new System.Windows.Forms.Padding(2);
             this.tbMessage.Multiline = true;
             this.tbMessage.Name = "tbMessage";
             this.tbMessage.Size = new System.Drawing.Size(417, 178);
@@ -94,7 +95,7 @@ namespace SendMail {
             // 
             this.tbTitle.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.tbTitle.Location = new System.Drawing.Point(121, 139);
-            this.tbTitle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbTitle.Margin = new System.Windows.Forms.Padding(2);
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.Size = new System.Drawing.Size(417, 31);
             this.tbTitle.TabIndex = 1;
@@ -102,8 +103,8 @@ namespace SendMail {
             // btSend
             // 
             this.btSend.Font = new System.Drawing.Font("MS UI Gothic", 12F);
-            this.btSend.Location = new System.Drawing.Point(471, 381);
-            this.btSend.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btSend.Location = new System.Drawing.Point(372, 381);
+            this.btSend.Margin = new System.Windows.Forms.Padding(2);
             this.btSend.Name = "btSend";
             this.btSend.Size = new System.Drawing.Size(67, 38);
             this.btSend.TabIndex = 2;
@@ -161,11 +162,23 @@ namespace SendMail {
             this.btConfig.UseVisualStyleBackColor = true;
             this.btConfig.Click += new System.EventHandler(this.btConfig_Click);
             // 
+            // btCancel
+            // 
+            this.btCancel.Enabled = false;
+            this.btCancel.Location = new System.Drawing.Point(471, 381);
+            this.btCancel.Name = "btCancel";
+            this.btCancel.Size = new System.Drawing.Size(67, 38);
+            this.btCancel.TabIndex = 4;
+            this.btCancel.Text = "送信取消";
+            this.btCancel.UseVisualStyleBackColor = true;
+            this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(583, 470);
+            this.Controls.Add(this.btCancel);
             this.Controls.Add(this.btConfig);
             this.Controls.Add(this.btSend);
             this.Controls.Add(this.tbTitle);
@@ -178,7 +191,7 @@ namespace SendMail {
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -200,6 +213,7 @@ namespace SendMail {
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btConfig;
+        private System.Windows.Forms.Button btCancel;
     }
 }
 

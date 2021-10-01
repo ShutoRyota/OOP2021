@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace SendMail {
     public class Settings {
@@ -43,6 +46,39 @@ namespace SendMail {
         public bool bSsl() {
             return true;
         }
+
+        public static Settings SetInfo() {
+            
+
+            using (var reader = XmlReader.Create("senderInfo.xml")) {
+                Settings settings = GetInstance();
+                var serializer = new DataContractSerializer(typeof(Settings));
+                settings = serializer.ReadObject(reader) as Settings;
+                return settings;
+            }
+        }
+
+        public void SaveInfo() {
+            var settings = Settings.GetInstance();
+
+            var set = new XmlWriterSettings {
+                Encoding = new UTF8Encoding(false),
+                Indent = true,
+                IndentChars = " ",
+            };
+
+            using (var writer = XmlWriter.Create("senderInfo.xml", set)) {
+                var serializer = new DataContractSerializer(settings.GetType());
+                serializer.WriteObject(writer, settings);
+            }
+
+        }
+
+        public void UpdateInfo() {
+            
+        }
     }
+    
+
 }
 
