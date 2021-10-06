@@ -18,7 +18,15 @@ namespace SendMail {
         private Settings settings = Settings.GetInstance();
         
         public ConfigForm() {
-            InitializeComponent();            
+                InitializeComponent();
+                tbHost.Text = settings.Host;
+                tbPort.Text = settings.Port.ToString();
+                tbUserName.Text = settings.MailAddr;
+                tbPass.Text = settings.Pass;
+                cbSsl.Checked = settings.Ssl;
+                tbSender.Text = settings.MailAddr;
+            
+            
         }
 
         private void btdefault_Click(object sender, EventArgs e) {
@@ -31,19 +39,42 @@ namespace SendMail {
         }
 
         private void btApply_Click(object sender, EventArgs e) {
-            SetInfo();            
+            SettingsSet();            
         }
 
         private void btOK_Click(object sender, EventArgs e) {
-            SetInfo();
-            this.Close();
+            if (SettingsSet()) {
+                this.Close();
+            }
+
+            
+         
         }
 
         private void btCancel_Click(object sender, EventArgs e) {
-            this.Close();
+            if (settings.CheckData()) {
+               this.Close();
+            }
+             MessageBox.Show("設定されていない項目があります");
         }
 
-        private void SetInfo() {
+        private bool SettingsSet() {
+            
+            if(tbHost.Text == string.Empty) {
+                MessageBox.Show("ホスト名を入力してください");
+                return false;
+            }
+
+            if (tbPort.Text == string.Empty) {
+                MessageBox.Show("ポート番号を入力してください");
+                return false;
+            }
+
+            if (tbUserName.Text == string.Empty) {
+                MessageBox.Show("メールアドレスを入力してください");
+                return false;
+            }
+
             settings.Host = tbHost.Text;
             settings.Port = int.Parse(tbPort.Text);
             settings.MailAddr = tbUserName.Text;
@@ -51,7 +82,7 @@ namespace SendMail {
             settings.Ssl = cbSsl.Checked;
 
             settings.SaveInfo();
-            
+            return true;
         }
     }
 }

@@ -14,12 +14,19 @@ using System.Windows.Forms;
 namespace SendMail {
     public partial class Form1 : Form {
         SmtpClient smtpClient = new SmtpClient();
-        Settings settings = Settings.GetInstance();
+        Settings settings;
 
         public Form1() {
             InitializeComponent();
-            if(File.Exists(@"C:\Users\infosys\source\repos\ShutoRyota\OOP2021\SendMail\SendMail\bin\Debug\senderInfo.xml"))
-                settings = Settings.SetInfo();
+
+            if (File.Exists("senderInfo.xml")) {
+                Settings.SetInfo();
+            }
+            else {
+                new ConfigForm().ShowDialog();
+            }
+
+            settings = Settings.GetInstance();
         }
 
         private void btSend_Click(object sender, EventArgs e) {

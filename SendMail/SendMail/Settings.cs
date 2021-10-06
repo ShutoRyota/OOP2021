@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -21,9 +22,9 @@ namespace SendMail {
         private Settings() { }
 
         public static Settings GetInstance() {
-            if (instance == null) {
+            if(instance == null) {
                 instance = new Settings();
-            }
+            }                
             return instance;
         }
 
@@ -47,14 +48,11 @@ namespace SendMail {
             return true;
         }
 
-        public static Settings SetInfo() {
-            
-
+        public static void SetInfo() {
+           
             using (var reader = XmlReader.Create("senderInfo.xml")) {
-                Settings settings = GetInstance();
                 var serializer = new DataContractSerializer(typeof(Settings));
-                settings = serializer.ReadObject(reader) as Settings;
-                return settings;
+                instance = serializer.ReadObject(reader) as Settings;
             }
         }
 
@@ -74,11 +72,21 @@ namespace SendMail {
 
         }
 
-        public void UpdateInfo() {
-            
+        public bool CheckData() {
+            if (string.IsNullOrEmpty(Port.ToString()))
+                return false;
+
+            if (string.IsNullOrEmpty(Host))
+                return false;
+
+            if (string.IsNullOrEmpty(MailAddr))
+                return false;
+
+            if (string.IsNullOrEmpty(Pass))
+                return false;
+
+            return true;
         }
     }
-    
-
 }
 
