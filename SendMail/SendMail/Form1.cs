@@ -14,7 +14,7 @@ using System.Windows.Forms;
 namespace SendMail {
     public partial class Form1 : Form {
         SmtpClient smtpClient = new SmtpClient();
-        Settings settings;
+        Settings settings = null;
 
         public Form1() {
             InitializeComponent();

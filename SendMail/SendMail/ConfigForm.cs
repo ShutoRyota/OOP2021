@@ -54,24 +54,31 @@ namespace SendMail {
         private void btCancel_Click(object sender, EventArgs e) {
             if (settings.CheckData()) {
                this.Close();
+            }else {
+                MessageBox.Show("設定されていない項目があります");
             }
-             MessageBox.Show("設定されていない項目があります");
+             
         }
 
         private bool SettingsSet() {
             
-            if(tbHost.Text == string.Empty) {
-                MessageBox.Show("ホスト名を入力してください");
+            if(string.IsNullOrEmpty(tbHost.Text)) {
+                MessageBox.Show("送信サーバを入力してください");
                 return false;
             }
 
-            if (tbPort.Text == string.Empty) {
+            if (string.IsNullOrEmpty(tbPort.Text)) {
                 MessageBox.Show("ポート番号を入力してください");
                 return false;
             }
 
-            if (tbUserName.Text == string.Empty) {
+            if (string.IsNullOrEmpty(tbUserName.Text)) {
                 MessageBox.Show("メールアドレスを入力してください");
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(tbPass.Text)) {
+                MessageBox.Show("パスワードを入力してください");
                 return false;
             }
 
