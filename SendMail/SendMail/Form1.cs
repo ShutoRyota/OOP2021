@@ -14,24 +14,27 @@ using System.Windows.Forms;
 namespace SendMail {
     public partial class Form1 : Form {
         SmtpClient smtpClient = new SmtpClient();
-        Settings settings = null;
+        Settings settings;// = Settings.GetInstance();
 
         public Form1() {
             InitializeComponent();
-
+            /*
             if (File.Exists("senderInfo.xml")) {
                 Settings.SetInfo();
             }
             else {
                 new ConfigForm().ShowDialog();
-            }
-
+            }*/
             settings = Settings.GetInstance();
         }
 
         private void btSend_Click(object sender, EventArgs e) {
             try {
-                
+
+                if (string.IsNullOrEmpty(tbTo.Text)) {
+                    MessageBox.Show("送信先を入力してください");
+                    return;
+                }
                 btCancel.Enabled = true;
 
                 //メール送信のためのインスタンス

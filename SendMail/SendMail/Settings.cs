@@ -19,11 +19,19 @@ namespace SendMail {
 
         private static Settings instance = null;
 
-        private Settings() { }
+        private Settings() {
+            
+        }
 
         public static Settings GetInstance() {
             if(instance == null) {
-                instance = new Settings();
+                try {
+                    SetInfo();
+                }catch(FileNotFoundException fne) {
+                    instance = new Settings();
+                    new ConfigForm().Show();
+                }
+                
             }                
             return instance;
         }
@@ -48,11 +56,10 @@ namespace SendMail {
             return true;
         }
 
-        public static void SetInfo() {
-           
-            using (var reader = XmlReader.Create("senderInfo.xml")) {
-                var serializer = new DataContractSerializer(typeof(Settings));
-                instance = serializer.ReadObject(reader) as Settings;
+        public static void SetInfo() {            
+                using (var reader = XmlReader.Create("senderInfo.xml")) {
+                    var serializer = new DataContractSerializer(typeof(Settings));
+                    instance = serializer.ReadObject(reader) as Settings;               
             }
         }
 
