@@ -16,7 +16,7 @@ namespace SendMail {
     public partial class ConfigForm : Form {
 
         private Settings settings = Settings.GetInstance();
-        
+
         public ConfigForm() {
                 InitializeComponent();
                 tbHost.Text = settings.Host;
@@ -24,8 +24,7 @@ namespace SendMail {
                 tbUserName.Text = settings.MailAddr;
                 tbPass.Text = settings.Pass;
                 cbSsl.Checked = settings.Ssl;
-                tbSender.Text = settings.MailAddr;
-            
+                tbSender.Text = settings.MailAddr;                
             
         }
 
@@ -60,8 +59,9 @@ namespace SendMail {
              
         }
 
-        private bool SettingsSet() {
-            
+        //入力情報を登録
+        private bool SettingsSet() {            
+            //情報が入力されているかの確認
             if(string.IsNullOrEmpty(tbHost.Text)) {
                 MessageBox.Show("送信サーバを入力してください");
                 return false;
@@ -82,13 +82,8 @@ namespace SendMail {
                 return false;
             }
 
-            settings.Host = tbHost.Text;
-            settings.Port = int.Parse(tbPort.Text);
-            settings.MailAddr = tbUserName.Text;
-            settings.Pass = tbPass.Text;
-            settings.Ssl = cbSsl.Checked;
+            settings.SetConfig(tbPort.Text, tbHost.Text, tbUserName.Text, tbPass.Text,cbSsl.Checked);
 
-            settings.SaveInfo();
             return true;
         }
     }

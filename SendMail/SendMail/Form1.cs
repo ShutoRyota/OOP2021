@@ -14,27 +14,31 @@ using System.Windows.Forms;
 namespace SendMail {
     public partial class Form1 : Form {
         SmtpClient smtpClient = new SmtpClient();
-        Settings settings;// = Settings.GetInstance();
+        Settings settings = Settings.GetInstance();
 
         public Form1() {
-            InitializeComponent();
-            /*
-            if (File.Exists("senderInfo.xml")) {
-                Settings.SetInfo();
-            }
-            else {
+            InitializeComponent();           
+        }
+
+        private void Form1_Shown(object sender, EventArgs e) {
+            if (Settings.EmptyFlg == false) {
                 new ConfigForm().ShowDialog();
-            }*/
-            settings = Settings.GetInstance();
+            }
         }
 
         private void btSend_Click(object sender, EventArgs e) {
-            try {
+            if (string.IsNullOrWhiteSpace(tbTo.Text)) {
+                MessageBox.Show("送信先を入力してください");
+                return;
+            }
 
-                if (string.IsNullOrEmpty(tbTo.Text)) {
-                    MessageBox.Show("送信先を入力してください");
-                    return;
-                }
+            if (string.IsNullOrWhiteSpace(tbMessage.Text)) {
+                MessageBox.Show("本文を入力してください");
+                return;
+            }
+
+            btSend.Enabled = false;
+            try {
                 btCancel.Enabled = true;
 
                 //メール送信のためのインスタンス
@@ -70,6 +74,7 @@ namespace SendMail {
         }
 
         private void SmtpClient_SendCompleted(object sender, AsyncCompletedEventArgs e) {
+            btSend.Enabled = true;
             if (e.Cancelled) {
                 MessageBox.Show("送信取消");
             }if(e.Error != null) {
@@ -77,18 +82,31 @@ namespace SendMail {
             }else {
                 MessageBox.Show("送信完了");
                 btCancel.Enabled = false;
+                新規作成ToolStripMenuItem_Click(sender, e);
             }
         }
 
 
         private void btConfig_Click(object sender, EventArgs e) {
-            new ConfigForm().ShowDialog();
+                new ConfigForm().ShowDialog();
         }
 
 
         private void btCancel_Click(object sender, EventArgs e) {          
             smtpClient.SendAsyncCancel();
             btCancel.Enabled = false;
+        }
+
+        private void 新規作成ToolStripMenuItem_Click(object sender, EventArgs e) {
+            tbTo.Text = string.Empty;
+            tbcc.Text = string.Empty;
+            tbbcc.Text = string.Empty;
+            tbTitle.Text = string.Empty;
+            tbMessage.Text = string.Empty;
+        }
+
+        private void 終了XToolStripMenuItem_Click(object sender, EventArgs e) {
+            this.Close();
         }
     }
 }

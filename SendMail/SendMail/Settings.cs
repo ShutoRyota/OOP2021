@@ -16,6 +16,7 @@ namespace SendMail {
         public string MailAddr { get; set; }
         public string Pass { get; set; }
         public bool Ssl { get; set; }
+        public static bool EmptyFlg { get; private set; } = true;
 
         private static Settings instance = null;
 
@@ -23,16 +24,17 @@ namespace SendMail {
             
         }
 
+
         public static Settings GetInstance() {
             if(instance == null) {
                 try {
                     SetInfo();
-                }catch(FileNotFoundException fne) {
+                }catch(Exception ex) {
                     instance = new Settings();
-                    new ConfigForm().Show();
+                    EmptyFlg = false;
                 }
-                
-            }                
+                    
+            }            
             return instance;
         }
 
@@ -56,13 +58,33 @@ namespace SendMail {
             return true;
         }
 
-        public static void SetInfo() {            
-                using (var reader = XmlReader.Create("senderInfo.xml")) {
-                    var serializer = new DataContractSerializer(typeof(Settings));
-                    instance = serializer.ReadObject(reader) as Settings;               
-            }
+        public bool SetConfig(string port,string host,string mailaddr,string pass,bool ssl) {
+            Host = host;
+            Port = int.Parse(port);
+            MailAddr = mailaddr;
+            Pass = pass;
+            Ssl = ssl;
+
+            instance.SaveInfo();
+
+            EmptyFlg = true;
+            return true;
         }
 
+        //逆シリアル化
+        public static void SetInfo() {
+            try {
+                using (var reader = XmlReader.Create("senderInfo.xml")) {
+                    var serializer = new DataContractSerializer(typeof(Settings));
+                    instance = serializer.ReadObject(reader) as Settings;
+                }
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+                
+        }
+        //シリアル化
         public void SaveInfo() {
             var settings = Settings.GetInstance();
 
@@ -79,6 +101,7 @@ namespace SendMail {
 
         }
 
+        //情報を持っているかの確認
         public bool CheckData() {
             if (string.IsNullOrEmpty(Port.ToString()))
                 return false;
