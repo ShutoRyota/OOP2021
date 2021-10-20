@@ -92,7 +92,7 @@ namespace SampleEntityFramework {
                 var books = db.Books.ToList();
 
                 foreach (var book in books) {
-                    Console.WriteLine($"{book.Title} {book.PublishedYear} {book.Author.Name}");
+                    Console.WriteLine($"{book.Title} {book.PublishedYear} {book.Author.Name}({book.Author.Birthday})");
                 }
             }
         }
@@ -102,7 +102,7 @@ namespace SampleEntityFramework {
                 var books = db.Books.Where(x => x.Title.Length == db.Books.Max(b => b.Title.Length));
 
                 foreach (var book in books) {
-                    Console.WriteLine($"{book.Title}");
+                    Console.WriteLine($"{book.Title} {book.PublishedYear} {book.Author.Name} ({book.Author.Birthday})");
                 }
 
             }
@@ -112,7 +112,7 @@ namespace SampleEntityFramework {
             using (var db = new BooksDbContext()) {
                 var books = db.Books.OrderBy(b => b.PublishedYear).Take(3);
                 foreach (var book in books) {
-                    Console.WriteLine($"{book.Title} {book.Author.Name}");
+                    Console.WriteLine($"{book.Title} {book.PublishedYear} {book.Author.Name}");
                 }
 
             }
@@ -120,10 +120,16 @@ namespace SampleEntityFramework {
 
         private static void Exercise13_5() {
             using (var db = new BooksDbContext()) {
+                var authors = db.Authors;
                 var books = db.Books.OrderByDescending(x => x.Author.Birthday).ToList();
-                foreach (var book in books) {
-                    Console.WriteLine($"{book.Author.Name} {book.Title} {book.PublishedYear}");
+                foreach(var author in authors) {
+                    Console.WriteLine($"{author.Name} {author.Birthday}");
+                    foreach (var book in books) {
+                        if(book.Author == author)
+                            Console.WriteLine($"  {book.Title} {book.PublishedYear}");
+                    }
                 }
+                
             }
         }
 
