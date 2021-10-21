@@ -30,6 +30,10 @@ namespace FormEntityFramework {
                     MessageBox.Show("登録完了");
                     this.Close();
                 }
+            }catch (InvalidOperationException ioe) {
+                MessageBox.Show("著者を登録してください");
+                Form3 form3 = new Form3(tbAuthor.Text);
+                form3.Show();
             }catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }

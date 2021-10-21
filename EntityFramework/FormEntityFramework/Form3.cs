@@ -15,6 +15,11 @@ namespace FormEntityFramework {
             InitializeComponent();
         }
 
+        public Form3(string name) {
+            InitializeComponent();
+            tbAutherName.Text = name;
+        }
+
         private void touroku_Click(object sender, EventArgs e) {
             try {
 
