@@ -92,7 +92,7 @@ namespace SampleEntityFramework {
                 var books = db.Books.ToList();
 
                 foreach (var book in books) {
-                    Console.WriteLine($"{book.Title} {book.PublishedYear} {book.Author.Name}({book.Author.Birthday})");
+                    Console.WriteLine($"{book.Title} {book.PublishedYear} {book.Author.Name}({book.Author.Birthday:yyyy/MM/dd})");
                 }
             }
         }
@@ -102,7 +102,7 @@ namespace SampleEntityFramework {
                 var books = db.Books.Where(x => x.Title.Length == db.Books.Max(b => b.Title.Length));
 
                 foreach (var book in books) {
-                    Console.WriteLine($"{book.Title} {book.PublishedYear} {book.Author.Name} ({book.Author.Birthday})");
+                    Console.WriteLine($"{book.Title} {book.PublishedYear} {book.Author.Name} ({book.Author.Birthday:yyyy/MM/dd})");
                 }
 
             }
@@ -120,10 +120,11 @@ namespace SampleEntityFramework {
 
         private static void Exercise13_5() {
             using (var db = new BooksDbContext()) {
-                var authors = db.Authors;
-                var books = db.Books.OrderByDescending(x => x.Author.Birthday).ToList();
+                var authors = db.Authors.OrderByDescending(x => x.Birthday);
+                var books = db.Books;
+
                 foreach(var author in authors) {
-                    Console.WriteLine($"{author.Name} {author.Birthday}");
+                    Console.WriteLine($"\r\n{author.Name} {author.Birthday:yyyy/MM/dd}");
                     foreach (var book in books) {
                         if(book.Author == author)
                             Console.WriteLine($"  {book.Title} {book.PublishedYear}");
