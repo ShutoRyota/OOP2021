@@ -121,13 +121,11 @@ namespace SampleEntityFramework {
         private static void Exercise13_5() {
             using (var db = new BooksDbContext()) {
                 var authors = db.Authors.OrderByDescending(x => x.Birthday);
-                var books = db.Books;
 
                 foreach(var author in authors) {
                     Console.WriteLine($"\r\n{author.Name} {author.Birthday:yyyy/MM/dd}");
-                    foreach (var book in books) {
-                        if(book.Author == author)
-                            Console.WriteLine($"  {book.Title} {book.PublishedYear}");
+                    foreach (var book in author.Books) {
+                        Console.WriteLine($"  {book.Title} {book.PublishedYear}");
                     }
                 }
                 
