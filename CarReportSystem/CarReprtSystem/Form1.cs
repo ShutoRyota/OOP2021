@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Linq;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static CarReprtSystem.CarReport;
 
 namespace CarReprtSystem {
     public partial class fmMain : Form {
@@ -63,12 +64,15 @@ namespace CarReprtSystem {
 
 
         private CarReport.MakerGroup selectedGroup() {
+            
+
 
             foreach (var rb in gbMaker.Controls) {
                 if (((RadioButton)rb).Checked)
+                    //return (MakerGroup)Enum.Parse(typeof(MakerGroup), ((RadioButton)rb).Text);
                     return (CarReport.MakerGroup)int.Parse((string)((RadioButton)rb).Tag);
             }
-            return CarReport.MakerGroup.その他;
+            return MakerGroup.その他;
 
         }
 
@@ -145,6 +149,7 @@ namespace CarReprtSystem {
             carReportDataGridView.CurrentRow.Cells[3].Value = selectedGroup();
             carReportDataGridView.CurrentRow.Cells[4].Value = cbCarName.Text;
             carReportDataGridView.CurrentRow.Cells[5].Value = tbReport.Text;
+            carReportDataGridView.CurrentRow.Cells[6].Value = ImageToByteArray(pbPicture.Image);
 
             this.Validate();
             this.carReportBindingSource.EndEdit();
@@ -189,6 +194,7 @@ namespace CarReprtSystem {
             rbOthers.Checked = true;
             cbCarName.Text = string.Empty;
             tbReport.Text = string.Empty;
+            pbPicture.Image = null;
         }
 
         private void carReportBindingNavigatorSaveItem_Click(object sender, EventArgs e) {
@@ -202,5 +208,34 @@ namespace CarReprtSystem {
             
 
         }
+
+        private void carReportDataGridView_SelectionChanged(object sender, EventArgs e) {
+            ClearScreen();
+            try {
+                dtpDate.Value = (DateTime)carReportDataGridView.CurrentRow.Cells[1].Value;
+                cbAutherName.Text = carReportDataGridView.CurrentRow.Cells[2].Value.ToString();
+                setMakerRb((MakerGroup)Enum.Parse(typeof(MakerGroup), carReportDataGridView.CurrentRow.Cells[3].Value.ToString()));
+                cbCarName.Text = carReportDataGridView.CurrentRow.Cells[4].Value.ToString();
+                tbReport.Text = carReportDataGridView.CurrentRow.Cells[5].Value.ToString();
+                pbPicture.Image = (Image)new ImageConverter().ConvertFrom(carReportDataGridView.CurrentRow.Cells[6].Value);
+                                  //ByteArrayToImage((byte[])carReportDataGridView.CurrentRow.Cells[6].Value);
+            }
+            catch (Exception ex) { }
+            
+        }
+
+        // バイト配列をImageオブジェクトに変換
+        public static Image ByteArrayToImage(byte[] b) {
+            ImageConverter imgconv = new ImageConverter();
+            Image img = (Image)imgconv.ConvertFrom(b);
+            return img;
+        }
+        // Imageオブジェクトをバイト配列に変換
+        public static byte[] ImageToByteArray(Image img) {
+            ImageConverter imgconv = new ImageConverter();
+            byte[] b = (byte[])imgconv.ConvertTo(img, typeof(byte[]));
+            return b;
+        }
+
     }
 }

@@ -426,6 +426,7 @@ namespace CarReprtSystem {
             this.carReportDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.carReportDataGridView.Size = new System.Drawing.Size(746, 249);
             this.carReportDataGridView.TabIndex = 23;
+            this.carReportDataGridView.SelectionChanged += new System.EventHandler(this.carReportDataGridView_SelectionChanged);
             // 
             // dataGridViewTextBoxColumn1
             // 

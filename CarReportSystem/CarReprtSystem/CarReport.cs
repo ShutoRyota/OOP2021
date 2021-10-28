@@ -14,6 +14,7 @@ namespace CarReprtSystem {
         public string CarName { get; set; }
         public string Report { get; set; }
         public Image Picture { get; set; }
+
         //メーカー
         public enum MakerGroup {
             トヨタ,
