@@ -16,7 +16,7 @@ namespace CarReprtSystem {
 
         public fmMain() {
             InitializeComponent();
-            dgvRegistData.DataSource = listCarReport;
+            //dgvRegistData.DataSource = listCarReport;
         }
 
 
@@ -117,25 +117,39 @@ namespace CarReprtSystem {
         private void btDataDelete_Click(object sender, EventArgs e) {
             if (listCarReport.Count<1) return;
 
-            listCarReport.RemoveAt(dgvRegistData.CurrentRow.Index);
+            //listCarReport.RemoveAt(dgvRegistData.CurrentRow.Index);
             
             ClearScreen();
         }
 
 
+        //接続ボタン
         private void btDataCorrect_Click(object sender, EventArgs e) {
-            if (dgvRegistData.CurrentRow == null) return;
+            /*if (dgvRegistData.CurrentRow == null) return;
 
             listCarReport[dgvRegistData.CurrentRow.Index].Update(
                                         dtpDate.Value, cbAutherName.Text,selectedGroup(),
                                         cbCarName.Text,tbReport.Text, pbPicture.Image);
 
             
-            dgvRegistData.Refresh();
+            dgvRegistData.Refresh();*/
         }
         
         
-        private void btSave_Click(object sender, EventArgs e) {
+        //更新ボタン
+        private void btUpdate_Click(object sender, EventArgs e) {
+            if (carReportDataGridView.CurrentRow == null) return;
+
+            carReportDataGridView.CurrentRow.Cells[1].Value = dtpDate.Value;
+            carReportDataGridView.CurrentRow.Cells[2].Value = cbAutherName.Text;
+            carReportDataGridView.CurrentRow.Cells[3].Value = selectedGroup();
+            carReportDataGridView.CurrentRow.Cells[4].Value = cbCarName.Text;
+            carReportDataGridView.CurrentRow.Cells[5].Value = tbReport.Text;
+
+            this.Validate();
+            this.carReportBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.infosys202126DataSet);
+#if false
             if(sfdFileSave.ShowDialog() == DialogResult.OK) {
                 //バイナリ形式でシリアル化
                 var bf = new BinaryFormatter();
@@ -143,11 +157,17 @@ namespace CarReprtSystem {
                     bf.Serialize(fs, listCarReport);
                 }
             }
+#endif
         }
 
 
-        private void btOpen_Click(object sender, EventArgs e) {
+        private void btConnect_Click(object sender, EventArgs e) {
+            // TODO: このコード行はデータを 'infosys202126DataSet.CarReport' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
+            this.carReportTableAdapter.Fill(this.infosys202126DataSet.CarReport);
+
+#if false
             if (ofdFileOpen.ShowDialog() == DialogResult.OK) {
+                
                 //バイナリ形式で逆シリアル化
                 var bf = new BinaryFormatter();
                 using (FileStream fs = File.Open(ofdFileOpen.FileName, FileMode.Open, FileAccess.Read)) {
@@ -155,9 +175,12 @@ namespace CarReprtSystem {
                     listCarReport = (BindingList<CarReport>)bf.Deserialize(fs);
                     dgvRegistData.DataSource = null;
                     dgvRegistData.DataSource = listCarReport;
-                }
+                }            
+                
 
             }
+
+#endif
         }
 
 
@@ -166,6 +189,18 @@ namespace CarReprtSystem {
             rbOthers.Checked = true;
             cbCarName.Text = string.Empty;
             tbReport.Text = string.Empty;
+        }
+
+        private void carReportBindingNavigatorSaveItem_Click(object sender, EventArgs e) {
+            this.Validate();
+            this.carReportBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.infosys202126DataSet);
+
+        }
+
+        private void fmMain_Load(object sender, EventArgs e) {
+            
+
         }
     }
 }
