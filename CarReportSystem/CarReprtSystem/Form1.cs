@@ -102,12 +102,14 @@ namespace CarReprtSystem {
 
 
         private void ClearScreen() {
-            dtpDate.Value = DateTime.Now;
-            cbAutherName.Text = string.Empty;
-            rbOthers.Checked = true;
-            cbCarName.Text = string.Empty;
-            tbReport.Text = string.Empty;
-            pbPicture.Image = null;
+            try {
+                dtpDate.Value = DateTime.Now;
+                cbAutherName.Text = string.Empty;
+                rbOthers.Checked = true;
+                cbCarName.Text = string.Empty;
+                tbReport.Text = string.Empty;
+                pbPicture.Image = null;
+            }catch(Exception ex) { }
         }
 
         private void carReportBindingNavigatorSaveItem_Click(object sender, EventArgs e) {
@@ -130,18 +132,25 @@ namespace CarReprtSystem {
         private void carReportDataGridView_SelectionChanged(object sender, EventArgs e) {
             ClearScreen();
             try {
+                //コントロールの制御
                 btConnect.Enabled = false;
+                bindingNavigator1.Enabled = true;
+                if (int.Parse(carReportDataGridView.CurrentRow.Cells[0].Value.ToString())<0)
+                    bindingNavigator1.Enabled = false;
 
+                //データ表示
                 dtpDate.Value = (DateTime)carReportDataGridView.CurrentRow.Cells[1].Value;
                 cbAutherName.Text = carReportDataGridView.CurrentRow.Cells[2].Value.ToString();
                 setMakerRb((MakerGroup)Enum.Parse(typeof(MakerGroup), carReportDataGridView.CurrentRow.Cells[3].Value.ToString()));
                 cbCarName.Text = carReportDataGridView.CurrentRow.Cells[4].Value.ToString();
                 tbReport.Text = carReportDataGridView.CurrentRow.Cells[5].Value.ToString();
                 pbPicture.Image =  (Image)new ImageConverter().ConvertFrom(carReportDataGridView.CurrentRow.Cells[6].Value);
-                //ByteArrayToImage((byte[])carReportDataGridView.CurrentRow.Cells[6].Value);
-                
+                                 //ByteArrayToImage((byte[])carReportDataGridView.CurrentRow.Cells[6].Value);
+
+                sslabel.Text = string.Empty;
             }
-            catch (Exception ex) { }
+            catch (NotSupportedException nsex) { pbPicture.Image = null; }
+            catch (Exception ex) { sslabel.Text = ex.Message; }
             
         }
 
