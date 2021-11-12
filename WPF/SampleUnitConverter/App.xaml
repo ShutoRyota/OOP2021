@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:SampleUnitConverter"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <SolidColorBrush x:Key="ButtonBrashKey" Color="AliceBlue" />
     </Application.Resources>
+    
 </Application>
