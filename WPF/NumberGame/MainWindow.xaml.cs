@@ -23,25 +23,25 @@ namespace NumberGame {
         Timer tm = new Timer();
         public MainWindow() {
             InitializeComponent();
-            //setButton(5,5);
-            Timer tm = new Timer();
-            tm.Start();
+            setButton(5,5);
+            //Timer tm = new Timer();
+            //tm.Start();
             
 
         }
 
         private void setButton(int row,int column) {
-            var obs = new List<Button>();
-            int n = 0;
+            
+            int n = 1;
             for(int i = 0; i < column; i++) {
                 for(int j = 0; j < row; j++) {
-                    obs.Add(new Button());
-                    obs[n].Content = $"b{n}";
-                    obs[n].SetValue(Grid.RowProperty, j);
-                    obs[n].SetValue(Grid.ColumnProperty, i);
-                    obs[n].Click += b1_Click;
-                    maingrid.Children.Add(obs[n]);
-                    n = n++;
+                    Button button = new Button();
+                    button.Content = $"{n}";
+                    button.SetValue(Grid.RowProperty, i);
+                    button.SetValue(Grid.ColumnProperty, j);
+                    button.Click += b1_Click;
+                    maingrid.Children.Add(button);
+                    n = ++n;
                 }
             }
 

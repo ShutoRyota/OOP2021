@@ -25,7 +25,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="b1" Content="1" Grid.Row="0" Grid.Column="0" Click="b1_Click"/>
+        <!--<Button x:Name="b1" Content="1" Grid.Row="0" Grid.Column="0" Click="b1_Click"/>
         <Button x:Name="b2" Content="2" Grid.Row="0" Grid.Column="1"/>
         <Button x:Name="b3" Content="3" Grid.Row="0" Grid.Column="2"/>
         <Button x:Name="b4" Content="4" Grid.Row="0" Grid.Column="3"/>
@@ -53,7 +53,7 @@
         <Button x:Name="b22" Content="22" Grid.Row="4" Grid.Column="1"/>
         <Button x:Name="b23" Content="23" Grid.Row="4" Grid.Column="2"/>
         <Button x:Name="b24" Content="24" Grid.Row="4" Grid.Column="3"/>
-            <Button x:Name="b25" Content="25" Grid.Row="5" Grid.Column="4"/>
+        <Button x:Name="b25" Content="25" Grid.Row="5" Grid.Column="4"/>-->
 
         </Grid>
         <TextBlock x:Name="hint"  HorizontalAlignment="Center"/>
