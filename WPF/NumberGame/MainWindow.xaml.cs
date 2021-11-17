@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,21 +14,52 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace NumberGame {
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class MainWindow : Window {
-        public int rand = 0;
-        Timer tm = new Timer();
+
+        int rand = 0;
+        DispatcherTimer tm1 = new DispatcherTimer();
+        DispatcherTimer tm2 = new DispatcherTimer();
+        Stopwatch sw = new Stopwatch();
+
         public MainWindow() {
             InitializeComponent();
             setButton(5,5);
-            //Timer tm = new Timer();
-            //tm.Start();
-            
+            StartTimer();
+            time.Text = GetSWTime();
+        }
 
+        public void StartTimer() {
+            sw.Start();
+            tm1.Interval = new TimeSpan(0,0,5);
+            tm1.Start();
+            tm1.Tick += Tm_Tick;
+
+            tm2.Interval = new TimeSpan(0, 0, 0, 0, 1);
+            tm2.Start();
+            tm2.Tick += Tm2_Tick;
+        }
+
+        private void Tm2_Tick(object sender, EventArgs e) {
+            time.Text = GetSWTime();
+        }
+
+        private string GetSWTime() {
+            return sw.Elapsed.ToString(@"ss\:ff");
+        }
+
+        private void Tm_Tick(object sender, EventArgs e) {
+            tm1.Stop();
+            tm2.Stop();
+            sw.Stop();
+            MessageBox.Show("時間切れ");
+            
+            
         }
 
         private void setButton(int row,int column) {
@@ -61,6 +93,9 @@ namespace NumberGame {
 
             if(rand == btnum) {
                 hint.Text = "正解";
+                tm1.Stop();
+                tm2.Stop();
+                sw.Stop();
             }else if(rand > btnum) {
                 hint.Text = "もっと大きい数字";
             }else {
