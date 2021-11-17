@@ -22,53 +22,31 @@ namespace NumberGame {
     /// </summary>
     public partial class MainWindow : Window {
 
+
         int rand = 0;
+        //ボタンの数を決める
+        const int root = 5;
+
         DispatcherTimer tm1 = new DispatcherTimer();
         DispatcherTimer tm2 = new DispatcherTimer();
         Stopwatch sw = new Stopwatch();
 
         public MainWindow() {
             InitializeComponent();
-            setButton(5,5);
-            StartTimer();
-            time.Text = GetSWTime();
+            setButton(root);
         }
 
-        public void StartTimer() {
-            sw.Start();
-            tm1.Interval = new TimeSpan(0,0,5);
-            tm1.Start();
-            tm1.Tick += Tm_Tick;
+        private void setButton(int root) {  
+            for(int i = 0; i < root; i++) {
+                maingrid.RowDefinitions.Add(new RowDefinition() { });
+                maingrid.ColumnDefinitions.Add(new ColumnDefinition() { });
+            }
 
-            tm2.Interval = new TimeSpan(0, 0, 0, 0, 1);
-            tm2.Start();
-            tm2.Tick += Tm2_Tick;
-        }
-
-        private void Tm2_Tick(object sender, EventArgs e) {
-            time.Text = GetSWTime();
-        }
-
-        private string GetSWTime() {
-            return sw.Elapsed.ToString(@"ss\:ff");
-        }
-
-        private void Tm_Tick(object sender, EventArgs e) {
-            tm1.Stop();
-            tm2.Stop();
-            sw.Stop();
-            MessageBox.Show("時間切れ");
-            
-            
-        }
-
-        private void setButton(int row,int column) {
-            
             int n = 1;
-            for(int i = 0; i < column; i++) {
-                for(int j = 0; j < row; j++) {
+            for(int i = 0; i < root; i++) {
+                for(int j = 0; j < root; j++) {
                     Button button = new Button();
-                    button.Content = $"{n}";
+                    button.Content = n.ToString();
                     button.SetValue(Grid.RowProperty, i);
                     button.SetValue(Grid.ColumnProperty, j);
                     button.Click += b1_Click;
@@ -76,16 +54,6 @@ namespace NumberGame {
                     n = ++n;
                 }
             }
-
-
-        }
-
-        private void MainWindow_Click(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e) {
-            rand = new Random().Next(1, 26);
         }
 
         private void b1_Click(object sender, RoutedEventArgs e) {
@@ -102,6 +70,41 @@ namespace NumberGame {
                 hint.Text = "もっと小さい数字";
             }
         }
+
+        private void start_Click(object sender, RoutedEventArgs e) {
+            rand = new Random().Next(1, root*root);
+            StartTimer();
+            time.Text = GetSWTime();
+        }
+
+        public void StartTimer() {
+            sw.Restart();
+
+            tm1.Interval = new TimeSpan(0, 0, 10);
+            tm1.Start();
+            tm1.Tick += Tm_Tick;
+
+            tm2.Interval = new TimeSpan(0, 0, 0, 0, 1);
+            tm2.Start();
+            tm2.Tick += Tm2_Tick;
+        }
+
+        private void Tm2_Tick(object sender, EventArgs e) {
+            time.Text = GetSWTime();
+        }
+
+        private string GetSWTime() {
+            return (tm1.Interval - sw.Elapsed).ToString(@"ss\:ff");
+        }
+
+        private void Tm_Tick(object sender, EventArgs e) {
+            tm1.Stop();
+            tm2.Stop();
+            sw.Stop();
+            time.Text = new TimeSpan().ToString(@"ss\:ff");
+            MessageBox.Show("時間切れ");
+        }
+
 
     }
 }
