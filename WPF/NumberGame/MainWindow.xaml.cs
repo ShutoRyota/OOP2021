@@ -23,7 +23,7 @@ namespace NumberGame {
     public partial class MainWindow : Window {
         int rand = 0;
         //ボタンの数を決める
-        private const int row = 9;
+        private const int row = 3;
         private const int column = 9;
         private List<Button> buttons = new List<Button>();
 
@@ -45,17 +45,16 @@ namespace NumberGame {
                 maingrid.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
-            int n = 1;
             for(int i = 0; i < row; i++) {
                 for(int j = 0; j < column; j++) {
                     Button button = new Button();
-                    button.Content = n.ToString();
+                    button.Content = (column * i) + (j + 1); 
                     button.SetValue(Grid.RowProperty, i);
                     button.SetValue(Grid.ColumnProperty, j);
                     button.Click += button_Click;
                     maingrid.Children.Add(button);
                     buttons.Add(button);
-                    n = ++n;
+                    
                 }
             }
         }
