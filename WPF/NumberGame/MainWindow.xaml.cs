@@ -21,63 +21,75 @@ namespace NumberGame {
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class MainWindow : Window {
-
-
         int rand = 0;
         //ボタンの数を決める
-        const int root = 5;
+        private const int row = 9;
+        private const int column = 9;
+        private List<Button> buttons = new List<Button>();
 
-        DispatcherTimer tm1 = new DispatcherTimer();
-        DispatcherTimer tm2 = new DispatcherTimer();
-        Stopwatch sw = new Stopwatch();
+        private DispatcherTimer tm1 = new DispatcherTimer();
+        private DispatcherTimer tm2 = new DispatcherTimer();
+        private Stopwatch sw = new Stopwatch();
 
         public MainWindow() {
             InitializeComponent();
-            setButton(root);
+            setButton(row,column);
         }
 
-        private void setButton(int root) {  
-            for(int i = 0; i < root; i++) {
-                maingrid.RowDefinitions.Add(new RowDefinition() { });
-                maingrid.ColumnDefinitions.Add(new ColumnDefinition() { });
+        private void setButton(int row,int column) {
+            
+            for(int i = 0; i < row; i++) {
+                maingrid.RowDefinitions.Add(new RowDefinition());
+            }
+            for(int i = 0; i < column; i++) {
+                maingrid.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
             int n = 1;
-            for(int i = 0; i < root; i++) {
-                for(int j = 0; j < root; j++) {
+            for(int i = 0; i < row; i++) {
+                for(int j = 0; j < column; j++) {
                     Button button = new Button();
                     button.Content = n.ToString();
                     button.SetValue(Grid.RowProperty, i);
                     button.SetValue(Grid.ColumnProperty, j);
-                    button.Click += b1_Click;
+                    button.Click += button_Click;
                     maingrid.Children.Add(button);
+                    buttons.Add(button);
                     n = ++n;
                 }
             }
         }
 
-        private void b1_Click(object sender, RoutedEventArgs e) {
+        private void button_Click(object sender, RoutedEventArgs e) {
             int btnum = int.Parse((string)((Button)sender).Content);
 
             if(rand == btnum) {
                 hint.Text = "正解";
+                ((Button)sender).Background = Brushes.Red;
                 tm1.Stop();
                 tm2.Stop();
                 sw.Stop();
             }else if(rand > btnum) {
                 hint.Text = "もっと大きい数字";
-            }else {
+                ((Button)sender).Background = Brushes.Yellow;
+            }
+            else {
                 hint.Text = "もっと小さい数字";
+                ((Button)sender).Background = Brushes.Yellow;
             }
         }
 
         private void start_Click(object sender, RoutedEventArgs e) {
-            rand = new Random().Next(1, root*root);
+            rand = new Random().Next(1, row*column);
             StartTimer();
             time.Text = GetSWTime();
+
+            foreach(var b in buttons) {
+                b.Background = start.Background;
+            }
         }
 
-        public void StartTimer() {
+        private void StartTimer() {
             sw.Restart();
 
             tm1.Interval = new TimeSpan(0, 0, 10);
