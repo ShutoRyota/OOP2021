@@ -24,7 +24,9 @@ namespace Pelmanism {
         /// </summary>
         /// <param name="cards">カード配列への参照</param>
         private void CreateCards(ref Card[] cards) {
-            string[] picture = { "〇", "●", "△", "▲", "□", "■", "◇", "◆", "☆", "★", "※", "×", };
+            Image[] picture = {Image.FromFile(@"pictures/picture1.jpg"), Image.FromFile(@"pictures/picture2.jpg"), Image.FromFile(@"pictures/picture3.jpg"), Image.FromFile(@"pictures/picture4.jpg"),
+                Image.FromFile(@"pictures/picture5.jpg"), Image.FromFile(@"pictures/picture6.jpg"), Image.FromFile(@"pictures/picture7.jpg"), Image.FromFile(@"pictures/picture8.jpg"),
+                Image.FromFile(@"pictures/picture9.jpg"),Image.FromFile(@"pictures/picture10.jpg"), Image.FromFile(@"pictures/picture11.jpg"), Image.FromFile(@"pictures/picture12.jpg"), };
 
             //カードインスタンス生成
             cards = new Card[picture.Length * 2];
