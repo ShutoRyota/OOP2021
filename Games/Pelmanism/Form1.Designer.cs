@@ -29,6 +29,7 @@ namespace Pelmanism {
             this.labelGuidance = new System.Windows.Forms.Label();
             this.buttonStart = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // labelSec
@@ -36,9 +37,8 @@ namespace Pelmanism {
             this.labelSec.AutoSize = true;
             this.labelSec.Location = new System.Drawing.Point(12, 9);
             this.labelSec.Name = "labelSec";
-            this.labelSec.Size = new System.Drawing.Size(47, 12);
+            this.labelSec.Size = new System.Drawing.Size(0, 12);
             this.labelSec.TabIndex = 0;
-            this.labelSec.Text = "0秒経過";
             // 
             // labelGuidance
             // 
@@ -66,6 +66,11 @@ namespace Pelmanism {
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // timer2
+            // 
+            this.timer2.Interval = 1000;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // FormGame
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -87,6 +92,7 @@ namespace Pelmanism {
         private System.Windows.Forms.Label labelGuidance;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 

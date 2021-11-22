@@ -14,6 +14,8 @@ namespace Pelmanism {
         private Card[] playingCards;
         private Player player;
         private int gameSec;
+        //制限時間
+        private int limit = 5;
         
         public FormGame() {
             InitializeComponent();
@@ -26,7 +28,7 @@ namespace Pelmanism {
         private void CreateCards(ref Card[] cards) {
             Image[] picture = {Image.FromFile(@"pictures/picture1.jpg"), Image.FromFile(@"pictures/picture2.jpg"), Image.FromFile(@"pictures/picture3.jpg"), Image.FromFile(@"pictures/picture4.jpg"),
                 Image.FromFile(@"pictures/picture5.jpg"), Image.FromFile(@"pictures/picture6.jpg"), Image.FromFile(@"pictures/picture7.jpg"), Image.FromFile(@"pictures/picture8.jpg"),
-                Image.FromFile(@"pictures/picture9.jpg"),Image.FromFile(@"pictures/picture10.jpg"), Image.FromFile(@"pictures/picture11.jpg"), Image.FromFile(@"pictures/picture12.jpg"), };
+                Image.FromFile(@"pictures/picture9.jpg"), Image.FromFile(@"pictures/picture10.jpg"), Image.FromFile(@"pictures/picture11.jpg"), Image.FromFile(@"pictures/picture12.jpg"), };
 
             //カードインスタンス生成
             cards = new Card[picture.Length * 2];
@@ -37,14 +39,16 @@ namespace Pelmanism {
         }
 
         private void FormGame_Load(object sender, EventArgs e) {
+            //残り時間の設定
+            labelSec.Text = labelSec.Text = $"残り{limit}秒";
+            timer2.Interval = limit * 1000;
+
             //カードの生成
             CreateCards(ref playingCards);
             //プレイヤーの生成
             player = new Player();
             //カードをフォームに動的に配置する
             SuspendLayout();
-
-
 
             const int offsetX = 30, offsetY = 50;
 
@@ -149,6 +153,7 @@ namespace Pelmanism {
             buttonStart.Enabled = false;
             gameSec = 0;
             timer1.Start();
+            timer2.Start();
             labelGuidance.Text = "クリックしてカードをめくってください";
         }
 
@@ -168,14 +173,18 @@ namespace Pelmanism {
                 playingCards[k].Picture = card.Picture;
                 card.Picture = tmp;
             }
-                
-            
-
         }
 
         private void timer1_Tick(object sender, EventArgs e) {
             gameSec++;
-            labelSec.Text = gameSec + "秒経過";
+            labelSec.Text = $"残り{(limit - gameSec)}秒";
+            
+        }
+
+        private void timer2_Tick(object sender, EventArgs e) {            
+            labelGuidance.Text = "時間切れです";
+            labelSec.Text = "残り0秒";
+            timer1.Stop();
         }
     }
 }
