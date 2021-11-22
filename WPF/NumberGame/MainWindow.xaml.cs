@@ -60,7 +60,7 @@ namespace NumberGame {
         }
 
         private void button_Click(object sender, RoutedEventArgs e) {
-            int btnum = int.Parse((string)((Button)sender).Content);
+            int btnum = int.Parse(((Button)sender).Content.ToString());
 
             if(rand == btnum) {
                 hint.Text = "正解";
